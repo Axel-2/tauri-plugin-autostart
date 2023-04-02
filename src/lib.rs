@@ -117,13 +117,7 @@ pub fn init<R: Runtime>(
                 // It must be: /Applications/Example.app
                 // If it didn't find exactly a single occurance of .app, it will default to
                 // exe path to not break it.
-                let exe_path = current_exe.canonicalize()?.display().to_string();
-                let parts: Vec<&str> = exe_path.split(".app/").collect();
-                let app_path = if parts.len() == 2 {
-                    format!("{}.app", parts.get(0).unwrap().to_string())
-                } else {
-                    exe_path
-                };
+                let app_path = current_exe.canonicalize()?.display().to_string();
                 info!("auto_start path {}", &app_path);
                 builder.set_app_path(&app_path);
             }
